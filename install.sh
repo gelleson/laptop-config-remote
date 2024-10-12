@@ -68,10 +68,6 @@ fetch_configuration() {
         echo "Fetching configuration from GitHub..."
         git clone https://github.com/gelleson/laptop-config-remote "$CONFIG_DIR"
         echo "Configuration fetched successfully."
-    else
-        echo "$CONFIG_DIR already exists. Pulling latest changes..."
-        cd "$CONFIG_DIR" && git pull origin master
-        echo "Latest changes pulled successfully."
     fi
 }
 
