@@ -42,7 +42,10 @@
         "zed"
         "webstorm"
         "pycharm"
+        "goland"
         "raycast"
+        "alacritty"
+        "jan"
       ];
 
       # Install neofetch and Go via system packages
@@ -52,6 +55,7 @@
         pkgs.git
         pkgs.tree
         pkgs.rye
+        pkgs.atuin
       ];
 
       # Allow unfree packages
