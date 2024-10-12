@@ -3,7 +3,9 @@
 
     # Enable home-manager
     programs.home-manager.enable = true;
-    programs.zsh.enable = true;
+    programs.zsh = {
+        enable = true;
+    };
     programs.zoxide = {
         enable = true;
         enableZshIntegration = true;
@@ -17,6 +19,7 @@
         updos-edit = "zed ~/.config/nix-darwin/";
         ls = "eza";
         cat = "bat";
+        llm-update-plugins = "sh ~/.config/nix-darwin/llm-install-plugins.sh";
     };
 
     programs.git = {

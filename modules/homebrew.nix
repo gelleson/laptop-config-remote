@@ -5,6 +5,7 @@
   homebrew.brews = [
     "colima"
     "rust"
+    "llm"
   ];
 
   homebrew.casks = [
