@@ -16,6 +16,8 @@
     "raycast"
     "warp"
     "jan"
+    "notion-calendar"
+    "poe"
   ];
 
   homebrew.masApps = {
