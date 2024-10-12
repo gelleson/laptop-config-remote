@@ -27,6 +27,7 @@
     gh
     delta
     act
+    llm
 
     # Programming languages and runtime managers
     go
