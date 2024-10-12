@@ -3,7 +3,6 @@
   homebrew.onActivation.autoUpdate = true;
 
   homebrew.brews = [
-    "colima"
     "rust"
     "llm"
   ];

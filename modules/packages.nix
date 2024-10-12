@@ -28,6 +28,7 @@
     delta
     act
     kubectl
+    colima
 
     # Programming languages and runtime managers
     go
