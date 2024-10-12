@@ -4,10 +4,10 @@ This repository provides a comprehensive setup for configuring macOS using Nix a
 
 ## Quick Start
 
-To quickly set up your macOS environment, you can use the provided `install.sh` script. Simply run the script in your terminal:
+To quickly set up your macOS environment, you can run the installation script directly from the repository using the following command:
 
 ```bash
-./install.sh
+curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash
 ```
 
 If you prefer to follow a manual installation process, please refer to the **Installation** section below for detailed steps.
