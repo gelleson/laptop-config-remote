@@ -27,9 +27,13 @@
     gh
     delta
     act
+    kubectl
 
     # Programming languages and runtime managers
     go
+    gleam
+    bun
+    deno
     flutter
     rye  # Python project manager
     fnm  # Fast Node Manager

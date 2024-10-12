@@ -18,6 +18,7 @@
         updos = "~/.config/nix-darwin/install.sh";
         updos-edit = "zed ~/.config/nix-darwin/";
         ls = "eza";
+        ll = "eza -alh";
         cat = "bat";
         llm-update-plugins = "sh ~/.config/nix-darwin/llm-install-plugins.sh";
     };
