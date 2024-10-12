@@ -25,6 +25,7 @@
     "pages" = 409201541;
     "numbers" = 409203825;
     "excel" = 462058435;
+    "telegram" = 747648890;
     # Add more apps as needed
   };
 }
