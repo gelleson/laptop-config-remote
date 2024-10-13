@@ -24,6 +24,19 @@
     }
     '';
 
+    home.file."Library/Application Support/io.datasette.llm/aliases.json".text = ''
+    {
+        "l1": "llama3.2:1b",
+        "l3": "llama3.2:3b",
+        "hku": "claude-3-haiku-20240307",
+        "f": "gemini-1.5-flash-002"
+    }
+    '';
+
+    home.file."Library/Application Support/io.datasette.llm/default_model.txt".text = ''
+    llama3.2:3b
+    '';
+
     home.file.".gitmessage".text = ''
     # Commit message
     # gelleson
