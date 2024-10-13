@@ -71,5 +71,6 @@
     imports = [
     ./files/templates.nix
     ./files/settings.nix
+    ./files/folders.nix
     ];
 }
