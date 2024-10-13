@@ -21,7 +21,18 @@
 
     ## Purpose
 
-    The projects in this directory are designed to contribute to the open-source ecosystem. They may include standalone applications, libraries, or contributions to existing open-source projects. My goal is to enhance the usability, performance, and functionality of software through collaborative development..
+    The projects in this directory are designed to contribute to the open-source ecosystem. They may include standalone applications, libraries, or contributions to existing open-source projects. My goal is to enhance the usability, performance, and functionality of software through collaborative development.
+    '';
+
+    home.file."codes/personal/pets/README.md".text = ''
+    # Pet Projects
+
+    This directory contains my personal pet projects, which are small-scale applications and experiments that allow me to explore new ideas and technologies in a relaxed and creative environment.
+
+    ## Purpose
+
+    The projects in this directory serve as a platform for learning, experimentation, and fun. They often focus on new programming languages, frameworks, or concepts that I want to explore outside of formal work projects. These projects help me improve my skills and discover innovative solutions to various problems.
+
     '';
 
     home.file."codes/commercial/README.md".text = ''
