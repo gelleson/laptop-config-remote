@@ -18,7 +18,7 @@ then
 fi
 
 # Array of LLM plugins to install
-plugins=(llm-together llm-groq llm-gemini)
+plugins=(llm-together llm-groq llm-gemini llm-claude-3 llm-ollama)
 
 # Install the LLM plugins
 echo "Installing LLM plugins..."

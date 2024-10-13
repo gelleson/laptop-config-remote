@@ -18,6 +18,7 @@
     "notion-calendar"
     "poe"
     "chatgpt"
+    "ollama"
   ];
 
   homebrew.masApps = {

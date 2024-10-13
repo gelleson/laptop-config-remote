@@ -1,114 +1,144 @@
+Here's a detailed, GitHub-like README.md for your project, including manual installation instructions:
+
 # macOS Configuration with Nix and Nix Darwin
 
 This repository provides a comprehensive setup for configuring macOS using Nix and Nix Darwin. It streamlines the installation process and helps manage system configurations efficiently.
 
-1. **Install Homebrew and Nix**:
-
-```bash
- curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s install
-```
-
-2. Fetch the configuration and ensure nix.conf:
-
-```
-curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s config
-```
-
-3. Install Nix Darwin and activate the configuration:
-
-```bash
-curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s activate
-```
-
-If you prefer to follow a manual installation process, please refer to the **Installation** section below for detailed steps.
-
 ## Table of Contents
 
+- [Quick Start](#quick-start)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
-  - [Installing NixOS](#installing-nixos)
-  - [Preparing Nix Configuration](#preparing-nix-configuration)
-  - [Installing Nix Darwin](#installing-nix-darwin)
+- [Manual Installation](#manual-installation)
+  - [1. Installing Nix](#1-installing-nix)
+  - [2. Configuring Nix](#2-configuring-nix)
+  - [3. Installing Nix Darwin](#3-installing-nix-darwin)
+  - [4. Cloning the Configuration](#4-cloning-the-configuration)
+  - [5. Activating the Configuration](#5-activating-the-configuration)
 - [Usage](#usage)
+- [Customization](#customization)
+- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
 
+## Quick Start
+
+For a quick setup, run these commands in sequence:
+
+1. Install Homebrew and Nix:
+   ```bash
+   curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s install
+   ```
+
+2. Fetch the configuration and ensure nix.conf:
+   ```bash
+   curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s config
+   ```
+
+3. Install Nix Darwin and activate the configuration:
+   ```bash
+   curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s activate
+   ```
+
 ## Features
 
-- Easy installation of Nix package manager.
-- Configuration management using Nix Darwin.
-- Customizable settings for personal or team use.
+- Easy installation of Nix package manager
+- Configuration management using Nix Darwin
+- Homebrew integration for additional package management
+- Customizable system settings and user environment
+- Pre-configured development tools and utilities
+- Shell enhancements with Zsh and useful aliases
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+- macOS (tested on macOS Monterey and later)
+- Administrative access to your machine
+- Internet connection for downloading packages
 
-- A macOS system.
-- Terminal access.
+## Manual Installation
 
-## Installation
+If you prefer to install manually or want more control over the process, follow these steps:
 
-### Installing NixOS
+### 1. Installing Nix
 
-To install the Nix package manager, run the following command in your terminal:
-
-```bash
-curl -L https://nixos.org/nix/install | sh
-```
-
-This command downloads and executes the installation script for Nix.
-
-### Preparing Nix Configuration
-
-After installing Nix, you need to copy the configuration file to the appropriate directory:
+Install the Nix package manager:
 
 ```bash
-cp ~/.config/nix-darwin/codes/nix.conf /etc/nix/
+sh <(curl -L https://nixos.org/nix/install)
 ```
 
-This step ensures that your custom `nix.conf` settings are applied.
+### 2. Configuring Nix
 
-### Installing Nix Darwin
+Create or edit `/etc/nix/nix.conf`:
 
-To install Nix Darwin, build it from the source:
+```bash
+sudo mkdir -p /etc/nix
+echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
+```
+
+### 3. Installing Nix Darwin
+
+Build and install Nix Darwin:
 
 ```bash
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-```
-
-Then, run the installer:
-
-```bash
 ./result/bin/darwin-installer
 ```
 
-Finally, copy your Zsh profile settings:
+### 4. Cloning the Configuration
+
+Clone this repository:
 
 ```bash
-cp ~/.config/nix-darwin/codes/.zprofile ~/.zprofile
+git clone https://github.com/gelleson/laptop-config-remote.git ~/.config/nix-darwin
 ```
 
-## Usage
+### 5. Activating the Configuration
 
-Once installed, you can manage packages and configurations using Nix and Nix Darwin. For example, you can run:
+Apply the configuration:
 
 ```bash
 darwin-rebuild switch --flake ~/.config/nix-darwin#my-mac
 ```
 
-This command activates your configuration.
+## Usage
+
+After installation, you can use the following commands:
+
+- Update and rebuild the system: `updos`
+- Edit configuration: `updos-edit`
+- List files: `ls` (uses `eza`)
+- Detailed file listing: `ll`
+- View file contents: `cat` (uses `bat`)
+- Update LLM plugins: `llm-update-plugins`
+
+## Customization
+
+To customize your setup:
+
+1. Edit files in `~/.config/nix-darwin/modules/`
+2. Modify `flake.nix` to add or remove modules
+3. Run `updos` to apply changes
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. Ensure Nix and Homebrew are in your PATH
+2. Check for error messages in the terminal output
+3. Verify that all prerequisites are met
+4. Try running `nix flake update` in the `~/.config/nix-darwin/` directory
 
 ## Contributing
 
-Contributions are welcome! Please follow these steps to contribute:
+Contributions are welcome! Please follow these steps:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature/YourFeature`).
-6. Open a Pull Request.
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/YourFeature`)
+3. Make your changes
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin feature/YourFeature`)
+6. Create a new Pull Request
 
 ## License
 
@@ -116,4 +146,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-Feel free to replace placeholders like `YourFeature` with actual information relevant to your project. This README provides a clear structure for users to understand what your project is about and how to use it effectively!
+For more information or support, please open an issue on the GitHub repository.
