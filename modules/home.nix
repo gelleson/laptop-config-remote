@@ -26,7 +26,7 @@
         ll = "eza -alh";
         cat = "bat";
         llm-update-plugins = "sh ~/.config/nix-darwin/codes/llm-install-plugins.sh";
-        git-message = "llm -m 'claude-3-haiku' -t git-message | xq -x //commit_message";
+        git-message = "git diff --staged | llm -m 'claude-3-haiku' -t git-message | xq -x //commit_message";
     };
 
     programs.git = {
