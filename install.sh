@@ -28,7 +28,7 @@
 CONFIG_REPO="${CONFIG_REPO:-https://github.com/gelleson/laptop-config-remote}"
 CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/nix-darwin}"
 NIX_CONF_FILE="${NIX_CONF_FILE:-/etc/nix/nix.conf}"
-FLAKE_TARGET="${FLAKE_TARGET:-~/.config/nix-darwin#my-mac}"
+FLAKE_TARGET="${FLAKE_TARGET:-$HOME/.config/nix-darwin#my-mac}"
 
 # Function to display help/usage information
 usage() {
@@ -100,6 +100,11 @@ install() {
     fi
 
     echo "Installation of Homebrew and Nix completed."
+    echo "Next step: run the following command to fetch the configuration:"
+    echo "curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s config"
+    echo ""
+    echo "This command will clone the configuration files from the repository and set up your Nix environment."
+    echo "It's essential to run this step to ensure your Nix settings and packages are aligned with your preferences."
 }
 
 # Subcommand: config - Fetch configuration and ensure nix.conf is updated
@@ -139,6 +144,11 @@ config() {
     ensure_experimental_features
 
     echo "Configuration and Nix settings ensured."
+    echo "Next step: run the following command to activate the configuration:"
+    echo "curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s activate"
+    echo ""
+    echo "Activating the configuration will apply the Nix settings and enable any services or packages you've defined in your Nix configuration."
+    echo "This step is crucial for ensuring your system is set up according to your preferences and for enabling features you may need."
 }
 
 # Subcommand: activate - Installs nix-darwin and activates the configuration
@@ -165,6 +175,20 @@ activate() {
     /run/current-system/sw/bin/darwin-rebuild switch --flake "$FLAKE_TARGET"
 
     echo "Configuration activated successfully."
+    echo ""
+    echo "Your Nix environment is now set up according to your preferences."
+    echo "You can start using your system with the new configurations and packages."
+    echo "If you need to make further changes, just modify your Nix configuration files and re-run the activation command."
+    echo ""
+    echo "You can also use the following useful aliases:"
+    echo "  updos = \"~/.config/nix-darwin/install.sh activate\""
+    echo "  updos-edit = \"zed ~/.config/nix-darwin/\""
+    echo "  ls = \"eza\""
+    echo "  ll = \"eza -alh\""
+    echo "  cat = \"bat\""
+    echo "  llm-update-plugins = \"sh ~/.config/nix-darwin/codes/llm-install-plugins.sh\""
+    echo ""
+    echo "Feel free to explore and customize these aliases to enhance your workflow!"
 }
 
 # Main script logic for handling subcommands and options

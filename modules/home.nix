@@ -15,12 +15,12 @@
     };
 
     programs.zsh.shellAliases = {
-        updos = "~/.config/nix-darwin/install.sh";
+        updos = "~/.config/nix-darwin/install.sh activate";
         updos-edit = "zed ~/.config/nix-darwin/";
         ls = "eza";
         ll = "eza -alh";
         cat = "bat";
-        llm-update-plugins = "sh ~/.config/nix-darwin/llm-install-plugins.sh";
+        llm-update-plugins = "sh ~/.config/nix-darwin/codes/llm-install-plugins.sh";
     };
 
     programs.git = {
@@ -89,8 +89,6 @@
             x = 2;
             y = 2;
           };
-
-          shell.program = "${pkgs.zsh}/bin/zsh";
 
           cursor.style = "Beam";
         };
