@@ -1,16 +1,21 @@
 #!/bin/bash
 
 # ------------------------------------------------------------------------------
-# Script Name: install_nix_darwin.sh
-# Description: This script checks for the installation of Homebrew and Nix,
-#              installs them if they are not present, and then installs
-#              nix-darwin. It also fetches configuration from a GitHub repository
-#              and runs the darwin-rebuild command to activate the configuration.
+# Script Name: manage_nix_darwin.sh
+# Description: Modular script with subcommands to manage Homebrew, Nix, and
+#              nix-darwin installation, configuration, and activation.
+#
+# Subcommands:
+#   install   - Installs Homebrew and Nix.
+#   config    - Fetches configuration from GitHub and ensures nix.conf is updated.
+#   activate  - Installs nix-darwin (if needed) and activates the configuration.
+#
+# Options:
+#   --help    - Displays usage information for the script.
 #
 # Usage:
-#   1. Save this script as install_nix_darwin.sh.
-#   2. Make it executable: chmod +x install_nix_darwin.sh
-#   3. Run the script: ./install_nix_darwin.sh
+#   SH_ACTION=install ./manage_nix_darwin.sh
+#   ./manage_nix_darwin.sh <subcommand>
 #
 # Requirements:
 # - Bash shell
@@ -19,87 +24,175 @@
 # Date: 2024-10-12
 # ------------------------------------------------------------------------------
 
-# Function to install Homebrew
-install_homebrew() {
-    echo "Homebrew is not installed. Installing now..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    echo "Homebrew installation complete."
+# Default environment variables (can be overridden by setting them when running the script)
+CONFIG_REPO="${CONFIG_REPO:-https://github.com/gelleson/laptop-config-remote}"
+CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/nix-darwin}"
+NIX_CONF_FILE="${NIX_CONF_FILE:-/etc/nix/nix.conf}"
+FLAKE_TARGET="${FLAKE_TARGET:-~/.config/nix-darwin#my-mac}"
+
+# Function to display help/usage information
+usage() {
+    echo "Usage: $0 {install|config|activate|--help}"
+    echo ""
+    echo "Subcommands:"
+    echo "  install   - Installs Homebrew and Nix."
+    echo "  config    - Fetches configuration from GitHub and ensures nix.conf is updated."
+    echo "  activate  - Installs nix-darwin (if needed) and activates the configuration."
+    echo ""
+    echo "Options:"
+    echo "  --help    - Displays this help message."
+    echo ""
+    echo "Environment Variables:"
+    echo "  SH_ACTION     - Run the script with a specific action (install, config, activate)."
+    echo "  CONFIG_REPO   - URL of the GitHub repository for fetching configuration (default: $CONFIG_REPO)"
+    echo "  CONFIG_DIR    - Directory for storing configuration (default: $CONFIG_DIR)"
+    echo "  NIX_CONF_FILE - Path to the Nix configuration file (default: $NIX_CONF_FILE)"
+    echo "  FLAKE_TARGET  - Target flake for nix-darwin (default: $FLAKE_TARGET)"
+    echo ""
+    echo "Examples:"
+    echo "  SH_ACTION=install $0"
+    echo "  CONFIG_REPO=https://github.com/your/repo.git CONFIG_DIR=~/.config/my-config $0 config"
+    echo "  $0 install"
+    exit 0
 }
 
-# Function to install Nix
-install_nix() {
-    echo "Nix is not installed. Installing now..."
-    curl -L https://nixos.org/nix/install | sh
-    echo "Nix installation complete."
-}
+# Subcommand: install - Installs Homebrew and Nix
+install() {
+    echo "Starting installation of Homebrew and Nix..."
 
-# Function to install nix-darwin
-install_nix_darwin() {
-    echo "Installing nix-darwin..."
-    nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-    ./result/bin/darwin-installer
-    echo "nix-darwin installation complete."
-}
+    # Function to install Homebrew
+    install_homebrew() {
+        echo "Homebrew is not installed. Installing now..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        echo "Homebrew installation complete."
+    }
 
-# Function to ensure experimental features are set in nix.conf
-ensure_experimental_features() {
-    NIX_CONF="/etc/nix/nix.conf"
-
-    if [ -f "$NIX_CONF" ]; then
-        if ! grep -q "^experimental-features =.*nix-command flakes" "$NIX_CONF"; then
-            echo "Appending experimental-features to $NIX_CONF..."
-            echo "experimental-features = nix-command flakes" >> "$NIX_CONF"
+    # Function to check if Homebrew is installed
+    check_homebrew_installed() {
+        if command -v brew &> /dev/null; then
+            echo "Homebrew is already installed."
+        elif [ -f "/opt/homebrew/bin/brew" ]; then
+            echo "Homebrew is installed, but not in PATH. Adding to PATH..."
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
         else
-            echo "experimental-features already set in $NIX_CONF."
+            install_homebrew
         fi
+    }
+
+    # Function to install Nix
+    install_nix() {
+        echo "Nix is not installed. Installing now..."
+        curl -L https://nixos.org/nix/install | sh
+        echo "Nix installation complete."
+    }
+
+    # Check if Homebrew is installed
+    check_homebrew_installed
+
+    # Check if Nix is installed
+    if ! command -v nix &> /dev/null; then
+        install_nix
     else
-        echo "$NIX_CONF does not exist. Please check your Nix installation."
-        exit 1
+        echo "Nix is already installed."
     fi
+
+    echo "Installation of Homebrew and Nix completed."
 }
 
-# Function to fetch configuration from GitHub repository
-fetch_configuration() {
-    CONFIG_DIR="$HOME/.config/nix-darwin"
+# Subcommand: config - Fetch configuration and ensure nix.conf is updated
+config() {
+    echo "Fetching configuration and ensuring correct Nix settings..."
 
-    if [ ! -d "$CONFIG_DIR" ]; then
-        echo "Fetching configuration from GitHub..."
-        git clone https://github.com/gelleson/laptop-config-remote "$CONFIG_DIR"
-        echo "Configuration fetched successfully."
-    fi
+    # Function to fetch configuration from GitHub repository
+    fetch_configuration() {
+        if [ ! -d "$CONFIG_DIR" ]; then
+            echo "Fetching configuration from GitHub ($CONFIG_REPO)..."
+            git clone "$CONFIG_REPO" "$CONFIG_DIR"
+            echo "Configuration fetched successfully."
+        else
+            echo "Configuration directory already exists ($CONFIG_DIR). Skipping fetch."
+        fi
+    }
+
+    # Function to ensure experimental features are set in nix.conf
+    ensure_experimental_features() {
+        if [ -f "$NIX_CONF_FILE" ]; then
+            if ! grep -q "^experimental-features =.*nix-command flakes" "$NIX_CONF_FILE"; then
+                echo "Appending experimental-features to $NIX_CONF_FILE..."
+                echo "experimental-features = nix-command flakes" >> "$NIX_CONF_FILE"
+            else
+                echo "experimental-features already set in $NIX_CONF_FILE."
+            fi
+        else
+            echo "$NIX_CONF_FILE does not exist. Please check your Nix installation."
+            exit 1
+        fi
+    }
+
+    # Fetch the configuration
+    fetch_configuration
+
+    # Ensure the correct experimental features are enabled in nix.conf
+    ensure_experimental_features
+
+    echo "Configuration and Nix settings ensured."
 }
 
-# Check if Homebrew is installed
-if ! command -v brew &> /dev/null; then
-    install_homebrew
+# Subcommand: activate - Installs nix-darwin and activates the configuration
+activate() {
+    echo "Installing nix-darwin and activating the configuration..."
+
+    # Function to install nix-darwin
+    install_nix_darwin() {
+        echo "Installing nix-darwin..."
+        nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+        ./result/bin/darwin-installer
+        echo "nix-darwin installation complete."
+    }
+
+    # Check if nix-darwin is installed
+    if [ ! -f "$HOME/.nixpkgs/darwin-configuration.nix" ]; then
+        install_nix_darwin
+    else
+        echo "nix-darwin is already installed."
+    fi
+
+    # Activate the configuration
+    echo "Activating configuration with darwin-rebuild..."
+    /run/current-system/sw/bin/darwin-rebuild switch --flake "$FLAKE_TARGET"
+
+    echo "Configuration activated successfully."
+}
+
+# Main script logic for handling subcommands and options
+# Check if SH_ACTION environment variable is set
+if [ -n "$SH_ACTION" ]; then
+    ACTION="$SH_ACTION"
+elif [ $# -gt 0 ]; then
+    ACTION="$1"
 else
-    echo "Homebrew is already installed."
+    usage
 fi
 
-# Check if Nix is installed
-if ! command -v nix &> /dev/null; then
-    install_nix
-else
-    echo "Nix is already installed."
-fi
-
-# Fetch configuration from GitHub repository
-fetch_configuration
-
-# Install nix-darwin if it's not already installed (you may want to check differently)
-if [ ! -f "$HOME/.nixpkgs/darwin-configuration.nix" ]; then
-    install_nix_darwin
-else
-    echo "nix-darwin is already installed."
-fi
-
-# Ensure experimental features are set in nix.conf before running darwin-rebuild
-ensure_experimental_features
-
-# Run darwin-rebuild to activate the configuration
-echo "Activating configuration with darwin-rebuild..."
-/run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix-darwin#my-mac
-
-echo "Configuration activated successfully."
+# Execute the subcommand based on the provided action
+case "$ACTION" in
+    install)
+        install
+        ;;
+    config)
+        config
+        ;;
+    activate)
+        activate
+        ;;
+    --help)
+        usage
+        ;;
+    *)
+        echo "Invalid option: $ACTION"
+        usage
+        ;;
+esac

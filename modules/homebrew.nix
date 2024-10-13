@@ -17,6 +17,7 @@
     "jan"
     "notion-calendar"
     "poe"
+    "chatgpt"
   ];
 
   homebrew.masApps = {
