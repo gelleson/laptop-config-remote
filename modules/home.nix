@@ -5,6 +5,11 @@
     programs.home-manager.enable = true;
     programs.zsh = {
         enable = true;
+        enableCompletion = true;
+        syntaxHighlighting.enable = true;
+        initExtra = ''
+        eval $(fnm env)
+        '';
     };
     programs.zoxide = {
         enable = true;
@@ -21,6 +26,7 @@
         ll = "eza -alh";
         cat = "bat";
         llm-update-plugins = "sh ~/.config/nix-darwin/codes/llm-install-plugins.sh";
+        git-message = "llm -m 'claude-3-haiku' -t git-message | xq -x //commit_message";
     };
 
     programs.git = {

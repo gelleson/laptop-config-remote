@@ -5,6 +5,7 @@
   homebrew.brews = [
     "rust"
     "llm"
+    "xq"
   ];
 
   homebrew.casks = [

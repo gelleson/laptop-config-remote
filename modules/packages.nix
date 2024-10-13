@@ -21,6 +21,7 @@
     eza
     zellij
     keepassxc
+    yq
 
     # Version control and development tools
     git
