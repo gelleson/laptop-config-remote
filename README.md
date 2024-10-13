@@ -1,5 +1,3 @@
-Here's a detailed, GitHub-like README.md for your project, including manual installation instructions:
-
 # macOS Configuration with Nix and Nix Darwin
 
 This repository provides a comprehensive setup for configuring macOS using Nix and Nix Darwin. It streamlines the installation process and helps manage system configurations efficiently.
@@ -26,11 +24,13 @@ This repository provides a comprehensive setup for configuring macOS using Nix a
 For a quick setup, run these commands in sequence:
 
 1. Install Homebrew and Nix:
+
    ```bash
    curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s install
    ```
 
 2. Fetch the configuration and ensure nix.conf:
+
    ```bash
    curl -L https://raw.githubusercontent.com/gelleson/laptop-config-remote/refs/heads/master/install.sh | bash -s config
    ```
