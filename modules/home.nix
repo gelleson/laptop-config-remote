@@ -9,6 +9,7 @@
         syntaxHighlighting.enable = true;
         initExtra = ''
         eval $(fnm env)
+        source "$HOME/.rye/env"
         '';
     };
     programs.zoxide = {
