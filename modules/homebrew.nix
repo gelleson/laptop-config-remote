@@ -20,6 +20,7 @@
     "poe"
     "chatgpt"
     "ollama"
+    "obsidian"
   ];
 
   homebrew.masApps = {
