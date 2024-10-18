@@ -23,6 +23,7 @@
     "obsidian"
     "duckduckgo"
     "coconutbattery"
+    "outline-manager"
   ];
 
   homebrew.masApps = {
@@ -31,6 +32,7 @@
     "numbers" = 409203825;
     "excel" = 462058435;
     "telegram" = 747648890;
+    "outline-vpn" = 1356178125;
     # Add more apps as needed
   };
 }
