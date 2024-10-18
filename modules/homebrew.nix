@@ -21,6 +21,7 @@
     "chatgpt"
     "ollama"
     "obsidian"
+    "duckduckgo"
   ];
 
   homebrew.masApps = {
