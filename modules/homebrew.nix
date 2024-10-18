@@ -22,6 +22,7 @@
     "ollama"
     "obsidian"
     "duckduckgo"
+    "coconutbattery"
   ];
 
   homebrew.masApps = {
