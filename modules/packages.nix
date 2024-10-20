@@ -23,6 +23,7 @@
     keepassxc
     yq
     just
+    pre-commit
 
     # Version control and development tools
     git
