@@ -34,7 +34,7 @@
     '';
 
     home.file."Library/Application Support/io.datasette.llm/default_model.txt".text = ''
-    llama3.2:3b
+    gemini-1.5-flash-002
     '';
 
     home.file.".gitmessage".text = ''
