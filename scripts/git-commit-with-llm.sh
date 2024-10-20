@@ -62,5 +62,4 @@ git commit -m "$commit_message" --quiet || {
 
 >&2 echo "Commit successful:"
 >&2 echo "Commit Message: $commit_message"
->&2 echo "Raw LLM Response: $llm_response"
 exit 0
