@@ -31,6 +31,7 @@
         git-commit = "~/.config/nix-darwin/scripts/git-commit-with-llm.sh";
         k = "kubectl";
         zupd = "source ~/.zshrc";
+        j = "just";
     };
 
     programs.git = {

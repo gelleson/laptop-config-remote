@@ -6,6 +6,7 @@
     "rust"
     "llm"
     "xq"
+    "gdal"
   ];
 
   homebrew.casks = [
