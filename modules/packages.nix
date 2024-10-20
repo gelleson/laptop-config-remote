@@ -22,6 +22,7 @@
     zellij
     keepassxc
     yq
+    just
 
     # Version control and development tools
     git
