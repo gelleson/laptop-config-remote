@@ -30,6 +30,7 @@
         git-message = "git diff --staged | llm -t git-message | xq -x //commit_message";
         git-commit = "~/.config/nix-darwin/scripts/git-commit-with-llm.sh";
         k = "kubectl";
+        zreindex = "source ~/.zshrc";
     };
 
     programs.git = {
