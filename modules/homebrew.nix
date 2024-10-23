@@ -7,6 +7,7 @@
     "llm"
     "xq"
     "gdal"
+    "deno"
   ];
 
   homebrew.casks = [

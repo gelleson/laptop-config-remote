@@ -37,7 +37,6 @@
     go
     gleam
     bun
-    deno
     flutter
     rye  # Python project manager
     fnm  # Fast Node Manager
