@@ -32,6 +32,7 @@
     act
     kubectl
     colima
+    turso-cli
 
     # Programming languages and runtime managers
     go
