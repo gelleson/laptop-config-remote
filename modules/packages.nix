@@ -62,6 +62,7 @@
     jetbrains.rust-rover
     jetbrains.pycharm-professional
     jetbrains.idea-ultimate
+    jetbrains.datagrip
     jetbrains.goland
 
     # Fonts
