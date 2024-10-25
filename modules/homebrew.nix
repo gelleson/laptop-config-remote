@@ -26,6 +26,7 @@
     "duckduckgo"
     "coconutbattery"
     "outline-manager"
+    "zen-browser"
   ];
 
   homebrew.masApps = {
