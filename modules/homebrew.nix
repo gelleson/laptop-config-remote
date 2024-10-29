@@ -9,6 +9,7 @@
     "gdal"
     "deno"
     "postgresql"
+    "libffi"
   ];
 
   homebrew.casks = [
