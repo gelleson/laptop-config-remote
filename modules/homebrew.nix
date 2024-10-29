@@ -8,6 +8,7 @@
     "xq"
     "gdal"
     "deno"
+    "postgresql"
   ];
 
   homebrew.casks = [
