@@ -41,6 +41,7 @@
     flutter
     rye  # Python project manager
     fnm  # Fast Node Manager
+    zig
 
     # Shell enhancements
     atuin  # Shell history sync
