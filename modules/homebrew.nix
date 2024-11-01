@@ -11,6 +11,7 @@
     "postgresql"
     "libffi"
     "uv"
+    "rustup"
   ];
 
   homebrew.casks = [
