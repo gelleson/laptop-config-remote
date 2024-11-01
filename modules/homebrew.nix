@@ -10,6 +10,7 @@
     "deno"
     "postgresql"
     "libffi"
+    "uv"
   ];
 
   homebrew.casks = [
