@@ -48,4 +48,83 @@
         Remember to keep the commit message concise, ideally under 50 characters if possible, but informative enough to understand the purpose of the commit at a glance.
         Only git message without any explanation
     '';
+
+    home.file."Library/Application Support/io.datasette.llm/templates/github-release.yaml".text = ''
+    defaults:
+        model: claude-3-haiku
+    prompt: |
+        You are tasked with generating an informative GitHub release note based on the differences (diff) between two versions of code. This release note should highlight the key changes, improvements, and fixes in a clear and concise manner.
+
+        You will be provided with the diff content between two versions. Here is the diff:
+
+        <diff>
+        $input
+        </diff>
+
+        Analyze the diff carefully, paying attention to:
+        1. Added, modified, and deleted files
+        2. Changes in code functionality
+        3. New features or enhancements
+        4. Bug fixes
+        5. Performance improvements
+        6. Documentation updates
+
+        Based on your analysis, generate a release note that:
+        1. Summarizes the most important changes
+        2. Groups related changes under appropriate headings (e.g., "New Features", "Bug Fixes", "Improvements")
+        3. Uses clear and concise language
+        4. Provides enough detail for users to understand the impact of the changes
+        5. Mentions any breaking changes or important notes for users upgrading to this version
+
+        Format the release note as follows:
+        1. Start with a brief overview of the release
+        2. Use bullet points for each change
+        3. Group changes under appropriate headings
+        4. Include a "Full Changelog" link at the end (you can use a placeholder URL)
+
+        This is target version <version>$version</version>
+
+        Here are two examples of good release notes:
+
+        Example 1:
+        ```
+        ## v1.2.0 - Performance Boost and Bug Fixes
+
+        This release focuses on improving overall performance and fixing several critical bugs.
+
+        ### Improvements
+        - Optimized database queries, resulting in a 30% faster load time for large datasets
+        - Reduced memory usage in the image processing module
+
+        ### Bug Fixes
+        - Fixed a crash that occurred when processing malformed JSON input
+        - Resolved an issue where the export function would fail for files larger than 1GB
+
+        ### Full Changelog
+        For a complete list of changes, please see the [full changelog](https://github.com/example/repo/compare/v1.1.0...v1.2.0).
+        ```
+
+        Example 2:
+        ```
+        ## v2.5.0 - New UI Components and API Enhancements
+
+        We're excited to introduce several new UI components and improvements to our API in this release.
+
+        ### New Features
+        - Added a customizable date picker component
+        - Introduced a new "dark mode" theme option
+
+        ### API Enhancements
+        - Added support for batch processing in the /users endpoint
+        - Implemented rate limiting for better API stability
+
+        ### Breaking Changes
+        - The `user.getProfile()` method now returns a Promise instead of using a callback
+
+        ### Full Changelog
+        For a detailed list of all changes, please refer to the [full changelog](https://github.com/example/repo/compare/v2.4.0...v2.5.0).
+        ```
+
+        Now, based on the provided diff and the guidelines above, generate an informative GitHub release note. Write your release note inside <release_note> tags.
+    '';
 }
