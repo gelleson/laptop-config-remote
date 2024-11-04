@@ -31,6 +31,7 @@
     "coconutbattery"
     "outline-manager"
     "zen-browser"
+    "openvpn-connect"
   ];
 
   homebrew.masApps = {
