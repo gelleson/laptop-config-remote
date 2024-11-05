@@ -32,6 +32,9 @@
         k = "kubectl";
         zupd = "source ~/.zshrc";
         j = "just";
+
+
+        llm-price = "~/.config/nix-darwin/scripts/llm-price.py";
     };
 
     programs.git = {
