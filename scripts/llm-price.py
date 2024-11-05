@@ -19,6 +19,7 @@ app = typer.Typer()
 config_path = Path("~/.config/llm-price/models.json").expanduser()
 alias_path = Path("~/.config/llm-price/alias.json").expanduser()
 
+
 # Check if the JSON configuration files exist and download or create if not
 def ensure_config():
     if not config_path.exists():
@@ -33,24 +34,29 @@ def ensure_config():
         with open(alias_path, "w") as file:
             json.dump({}, file)  # Create an empty alias file
 
+
 # Load the JSON configuration data
 def load_config():
     with open(config_path, "r") as file:
         return json.load(file)
+
 
 # Load the alias data
 def load_aliases():
     with open(alias_path, "r") as file:
         return json.load(file)
 
+
 # Save the alias data to the alias file
 def save_aliases(aliases):
     with open(alias_path, "w") as file:
         json.dump(aliases, file, indent=2)
 
+
 # Function to resolve model aliases
 def resolve_alias(model_name: str, aliases: dict):
     return aliases.get(model_name, model_name)
+
 
 # Function to calculate the total cost and format the output
 def calculate_total_cost(data, model: str, input_tokens: int, output_tokens: int, multiplier: float, format: str):
@@ -84,13 +90,16 @@ def calculate_total_cost(data, model: str, input_tokens: int, output_tokens: int
         case _:
             typer.echo(f"Unknown format: {format}. Please choose 'plain', 'simple', 'json', or 'detailed'.")
 
+
 @app.command("calc")
 def calc(
-    model: str = typer.Option("gpt-4o", "--model", "-m", help="Model name or alias (e.g., gpt-4, sample_spec, or alias)"),
-    input_tokens: int = typer.Option(..., "--input_tokens", "-i", help="Number of input tokens"),
-    output_tokens: int = typer.Option(..., "--output_tokens", "-o", help="Number of output tokens"),
-    multiplier: float = typer.Option(1.0, "--multiplier", "-x", help="Cost multiplier (default: 1)"),
-    format: str = typer.Option("plain", "--format", "-f", help="Output format: 'plain', 'simple', 'json', or 'detailed'"),
+        model: str = typer.Option("gpt-4o", "--model", "-m",
+                                  help="Model name or alias (e.g., gpt-4, sample_spec, or alias)"),
+        input_tokens: int = typer.Option(..., "--input_tokens", "-i", help="Number of input tokens"),
+        output_tokens: int = typer.Option(..., "--output_tokens", "-o", help="Number of output tokens"),
+        multiplier: float = typer.Option(1.0, "--multiplier", "-x", help="Cost multiplier (default: 1)"),
+        format: str = typer.Option("plain", "--format", "-f",
+                                   help="Output format: 'plain', 'simple', 'json', or 'detailed'"),
 ):
     """
     Calculate LLM pricing based on model presets, with support for model aliases.
@@ -107,6 +116,7 @@ def calc(
 
     # Calculate and display the total cost in the specified format
     calculate_total_cost(data, resolved_model, input_tokens, output_tokens, multiplier, format)
+
 
 @app.command("add-alias")
 def add_alias(alias: str, model: str):
@@ -130,14 +140,58 @@ def add_alias(alias: str, model: str):
     save_aliases(aliases)
     typer.echo(f"Alias '{alias}' added for model '{model}'.")
 
+
+@app.command("remove-alias")
+def remove_alias(alias: str):
+    """
+    Remove an alias for a model.
+    """
+    # Ensure config files exist, download or create if necessary
+    ensure_config()
+
+    # Load configuration data and aliases
+    data = load_config()
+    aliases = load_aliases()
+
+    # Check if the alias exists in the aliases
+    if alias not in aliases:
+        typer.echo(f"Error: Alias '{alias}' does not exist in the aliases.")
+        sys.exit(1)
+
+    # Remove the alias
+    del aliases[alias]
+    save_aliases(aliases)
+    typer.echo(f"Alias '{alias}' removed.")
+
+
+@app.command("list-aliases")
+def list_aliases():
+    """
+    List all aliases.
+    """
+    # Ensure config files exist, download or create if necessary
+    ensure_config()
+
+    # Load configuration data and aliases
+    data = load_config()
+    aliases = load_aliases()
+
+    # Display aliases
+    for alias, model in aliases.items():
+        typer.echo(f"Alias: {alias}")
+        typer.echo(f"  Model: {model}")
+        typer.echo("-" * 30)
+
+
 @app.command("models")
 def list_models(
-    provider: str = typer.Option(None, "--provider", "-p", help="Filter models by provider"),
-    mode: str = typer.Option("chat", "--mode", "-m", help="Filter models by mode (e.g., chat, embedding, etc.)"),
-    sort_by: str = typer.Option(None, "--sort-by", "-s", help="Sort by 'input' or 'output' per million tokens. Prefix with '-' for descending."),
-    limit: int = typer.Option(None, "--limit", "-n", help="Limit the number of models displayed"),
-    search: str = typer.Option(None, "--search", "-q", help="Search models by name using glob pattern"),
-    list_providers: bool = typer.Option(False, "--list-providers", "-l", help="List available providers"),
+        provider: str = typer.Option(None, "--provider", "-p", help="Filter models by provider"),
+        mode: str = typer.Option("chat", "--mode", "-m", help="Filter models by mode (e.g., chat, embedding, etc.)"),
+        sort_by: str = typer.Option(None, "--sort-by", "-s",
+                                    help="Sort by 'input' or 'output' per million tokens. Prefix with '-' for descending."),
+        limit: int = typer.Option(None, "--limit", "-n", help="Limit the number of models displayed"),
+        search: str = typer.Option(None, "--search", "-q", help="Search models by name using glob pattern"),
+        list_providers: bool = typer.Option(False, "--list-providers", "-l", help="List available providers"),
 ):
     """
     List models and their input/output costs (per million tokens), optionally filtered by provider, mode, sorted by price, limited, and searchable by model name.
@@ -218,6 +272,7 @@ def list_models(
             typer.echo(f"  Input Cost per Million Tokens: ${model['input_cost_per_million']:.2f}")
             typer.echo(f"  Output Cost per Million Tokens: ${model['output_cost_per_million']:.2f}")
             typer.echo("-" * 30)
+
 
 if __name__ == "__main__":
     app()
