@@ -15,6 +15,8 @@ from pathlib import Path
 
 app = typer.Typer()
 
+alias_ = typer.Typer()
+
 # Paths to configuration files
 config_path = Path("~/.config/llm-price/models.json").expanduser()
 alias_path = Path("~/.config/llm-price/alias.json").expanduser()
@@ -118,7 +120,7 @@ def calc(
     calculate_total_cost(data, resolved_model, input_tokens, output_tokens, multiplier, format)
 
 
-@app.command("add-alias")
+@alias_.command("add")
 def add_alias(alias: str, model: str):
     """
     Add or update an alias for a model.
@@ -141,7 +143,7 @@ def add_alias(alias: str, model: str):
     typer.echo(f"Alias '{alias}' added for model '{model}'.")
 
 
-@app.command("remove-alias")
+@alias_.command("remove")
 def remove_alias(alias: str):
     """
     Remove an alias for a model.
@@ -164,7 +166,7 @@ def remove_alias(alias: str):
     typer.echo(f"Alias '{alias}' removed.")
 
 
-@app.command("list-aliases")
+@alias_.command("list")
 def list_aliases():
     """
     List all aliases.
@@ -261,18 +263,19 @@ def list_models(
             sys.exit(1)
 
             # Limit the number of displayed models if specified
-        if limit:
-            models = models[:limit]
+    if limit:
+        models = models[:limit]
 
-            # Display models
-        for model in models:
-            typer.echo(f"Model: {model['name']}")
-            typer.echo(f"  Provider: {model['provider']}")
-            typer.echo(f"  Mode: {model['mode']}")
-            typer.echo(f"  Input Cost per Million Tokens: ${model['input_cost_per_million']:.2f}")
-            typer.echo(f"  Output Cost per Million Tokens: ${model['output_cost_per_million']:.2f}")
-            typer.echo("-" * 30)
+        # Display models
+    for model in models:
+        typer.echo(f"Model: {model['name']}")
+        typer.echo(f"  Provider: {model['provider']}")
+        typer.echo(f"  Mode: {model['mode']}")
+        typer.echo(f"  Input Cost per Million Tokens: ${model['input_cost_per_million']:.2f}")
+        typer.echo(f"  Output Cost per Million Tokens: ${model['output_cost_per_million']:.2f}")
+        typer.echo("-" * 30)
 
+app.add_typer(alias_, name="alias", help="Manage aliases for models.")
 
 if __name__ == "__main__":
     app()
