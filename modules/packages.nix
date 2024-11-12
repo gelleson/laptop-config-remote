@@ -42,7 +42,6 @@
     rye  # Python project manager
     fnm  # Fast Node Manager
     zig
-    yarn
 
     # Shell enhancements
     atuin  # Shell history sync
