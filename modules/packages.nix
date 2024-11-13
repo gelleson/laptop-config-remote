@@ -46,6 +46,7 @@
     # Shell enhancements
     atuin  # Shell history sync
     zsh-powerlevel10k
+    asdf-vm
 
     # Container and virtualization
     docker
