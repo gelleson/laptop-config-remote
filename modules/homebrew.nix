@@ -31,6 +31,11 @@
     "coconutbattery"
     "outline-manager"
     "zen-browser"
+    "goland"
+    "webstorm"
+    "rustrover"
+    "pycharm"
+    "datagrip"
   ];
 
   homebrew.masApps = {

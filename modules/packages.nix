@@ -59,13 +59,6 @@
     age
     age-plugin-yubikey
 
-    # JetBrains IDEs
-    jetbrains.webstorm
-    jetbrains.rust-rover
-    jetbrains.pycharm-professional
-    jetbrains.idea-ultimate
-    jetbrains.datagrip
-    jetbrains.goland
 
     # Fonts
     jetbrains-mono
