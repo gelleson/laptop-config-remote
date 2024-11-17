@@ -36,6 +36,7 @@
     "rustrover"
     "pycharm"
     "datagrip"
+    "intellij-idea"
   ];
 
   homebrew.masApps = {
