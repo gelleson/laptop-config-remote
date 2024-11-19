@@ -12,6 +12,7 @@
     "libffi"
     "uv"
     "rustup"
+    "ruby"
   ];
 
   homebrew.casks = [
