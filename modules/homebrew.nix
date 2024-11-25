@@ -13,6 +13,7 @@
     "uv"
     "rustup"
     "ruby"
+    "mockery"
   ];
 
   homebrew.casks = [
