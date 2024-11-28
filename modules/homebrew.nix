@@ -14,6 +14,7 @@
     "rustup"
     "ruby"
     "mockery"
+    "goreleaser"
   ];
 
   homebrew.casks = [
