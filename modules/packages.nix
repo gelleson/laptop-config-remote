@@ -37,6 +37,7 @@
     # Programming languages and runtime managers
     go
     gleam
+    erlang
     bun
     flutter
     rye  # Python project manager
@@ -71,7 +72,6 @@
     wget
     httpie
 
-    # Additional tools (you might want to categorize these further)
-    # ...
+    oh-my-zsh
   ];
 }

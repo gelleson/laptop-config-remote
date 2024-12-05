@@ -14,6 +14,12 @@
         autoload -Uz bashcompinit && bashcompinit
         . "${pkgs.asdf-vm}/share/asdf-vm/completions/asdf.bash"
         '';
+
+        oh-my-zsh = {
+            enable = true;
+            plugins = [ ];
+            theme = "awesomepanda";
+        };
     };
     programs.zoxide = {
         enable = true;
@@ -76,7 +82,6 @@
         enableFishIntegration = true;
         enableZshIntegration = true;
     };
-
 
     imports = [
     ./files/templates.nix
