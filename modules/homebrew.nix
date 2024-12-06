@@ -15,6 +15,8 @@
     "ruby"
     "mockery"
     "goreleaser"
+    "gleam"
+    "erlang"
   ];
 
   homebrew.casks = [

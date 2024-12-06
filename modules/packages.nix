@@ -36,8 +36,6 @@
 
     # Programming languages and runtime managers
     go
-    gleam
-    erlang
     bun
     flutter
     rye  # Python project manager
