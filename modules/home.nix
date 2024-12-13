@@ -13,6 +13,33 @@
         . "${pkgs.asdf-vm}/share/asdf-vm/asdf.sh"
         autoload -Uz bashcompinit && bashcompinit
         . "${pkgs.asdf-vm}/share/asdf-vm/completions/asdf.bash"
+
+        load-nvmrc() {
+          DEFAULT_NODE_VERSION="$(fnm ls | awk '/default/{print $2}')"
+          CURRENT_NODE_VERSION="$(fnm current)"
+          REQUIRED_NODE_VERSION=""
+
+          if [[ -f .nvmrc && -r .nvmrc ]]; then
+            REQUIRED_NODE_VERSION="$(cat .nvmrc)"
+
+            if [[ $CURRENT_NODE_VERSION != $REQUIRED_NODE_VERSION ]]; then
+              if fnm ls | grep -q $REQUIRED_NODE_VERSION; then
+                fnm use $REQUIRED_NODE_VERSION
+              else
+                fnm install $REQUIRED_NODE_VERSION
+                fnm use $REQUIRED_NODE_VERSION
+              fi
+            fi
+          else
+            if [[ $CURRENT_NODE_VERSION != $DEFAULT_NODE_VERSION ]]; then
+              fnm use $DEFAULT_NODE_VERSION
+            fi
+          fi
+        }
+
+        add-zsh-hook chpwd load-nvmrc
+        load-nvmrc
+
         '';
 
         oh-my-zsh = {
