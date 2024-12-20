@@ -37,6 +37,8 @@
           fi
         }
 
+        export PATH="$HOME/.bun/bin:$PATH"
+
         add-zsh-hook chpwd load-nvmrc
         load-nvmrc
 
