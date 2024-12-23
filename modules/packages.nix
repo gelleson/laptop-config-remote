@@ -36,7 +36,6 @@
 
     # Programming languages and runtime managers
     go
-    bun
     flutter
     rye  # Python project manager
     fnm  # Fast Node Manager

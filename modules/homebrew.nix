@@ -17,6 +17,7 @@
     "goreleaser"
     "gleam"
     "erlang"
+    "oven-sh/bun/bun"
   ];
 
   homebrew.casks = [
