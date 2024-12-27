@@ -43,6 +43,7 @@
     "pycharm"
     "datagrip"
     "intellij-idea"
+    "ghostty"
   ];
 
   homebrew.masApps = {

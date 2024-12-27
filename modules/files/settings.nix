@@ -1,4 +1,11 @@
 { config, pkgs, home, ... }:{
+    home.file.".config/ghostty/config".text = ''
+      font-family = "JetBrains Mono"
+      font-size = 22
+      theme = Blue Matrix
+      window-padding-x = 2
+      background-opacity = 0
+    '';
     home.file.".config/zed/settings.json".text = ''
     // Zed setting
     //
@@ -380,12 +387,13 @@
         "l1": "llama3.2:1b",
         "l3": "llama3.2:3b",
         "hku": "claude-3-haiku-20240307",
-        "f": "gemini-1.5-flash-002"
+        "f": "gemini-1.5-flash-002",
+        "fd": "gemini-1.5-flash-8b-latest"
     }
     '';
 
     home.file."Library/Application Support/io.datasette.llm/default_model.txt".text = ''
-    gemini-1.5-flash-002
+    gemini-1.5-flash-8b-latest
     '';
 
     home.file.".gitmessage".text = ''

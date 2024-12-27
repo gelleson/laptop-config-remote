@@ -7,8 +7,7 @@
 # This script checks if the 'llm' command is installed on the system.
 # If it is not installed, the script exits with a message.
 # It proceeds to install a predefined list of LLM plugins.
-# After attempting to install each plugin, the script reports
-# whether the installation was successful or not.
+# Errors during installation are ignored, and no error messages are displayed.
 
 # Check if the llm command is installed
 if ! command -v llm &> /dev/null
@@ -24,10 +23,8 @@ plugins=(llm-together llm-groq llm-gemini llm-claude-3 llm-ollama)
 echo "Installing LLM plugins..."
 
 for plugin in "${plugins[@]}"; do
-    llm install "$plugin"
-    if [ $? -eq 0 ]; then
-        echo "$plugin installed successfully."
-    else
-        echo "Failed to install $plugin."
-    fi
+    llm install "$plugin" &> /dev/null
+    echo "$plugin installation attempt completed."
 done
+
+echo "Plugin installation process completed."
