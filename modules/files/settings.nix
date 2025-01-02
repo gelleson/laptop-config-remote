@@ -4,7 +4,7 @@
       font-size = 22
       theme = Blue Matrix
       window-padding-x = 2
-      background-opacity = 0
+      background-opacity = 0.8
     '';
     home.file.".config/zed/settings.json".text = ''
     // Zed setting
