@@ -18,6 +18,7 @@
     "gleam"
     "erlang"
     "oven-sh/bun/bun"
+    "sdkman-cli"
   ];
 
   homebrew.casks = [
@@ -43,7 +44,10 @@
     "pycharm"
     "datagrip"
     "intellij-idea"
-    "ghostty"
+  ];
+
+  homebrew.taps = [
+    "sdkman/tap"
   ];
 
   homebrew.masApps = {
