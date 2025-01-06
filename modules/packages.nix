@@ -70,5 +70,7 @@
     httpie
 
     oh-my-zsh
+
+    jira-cli-go
   ];
 }

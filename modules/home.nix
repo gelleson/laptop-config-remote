@@ -42,7 +42,7 @@
         [[ -s "$(brew --prefix sdkman-cli)/libexec/bin/sdkman-init.sh" ]] && source "$(brew --prefix sdkman-cli)/libexec/bin/sdkman-init.sh"
         add-zsh-hook chpwd load-nvmrc
         load-nvmrc
-
+        source $(jira completion zsh)
         '';
 
         oh-my-zsh = {
@@ -71,6 +71,7 @@
         k = "kubectl";
         zupd = "source ~/.zshrc";
         j = "just";
+        ils = "jira issue list -a$(jira me)";
 
 
         llm-price = "~/.config/nix-darwin/scripts/llm-price.py";
