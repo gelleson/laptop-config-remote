@@ -43,6 +43,7 @@
         add-zsh-hook chpwd load-nvmrc
         load-nvmrc
         source $(jira completion zsh)
+        source ~/.secrets
         '';
 
         oh-my-zsh = {
