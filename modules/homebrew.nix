@@ -19,6 +19,7 @@
     "erlang"
     "oven-sh/bun/bun"
     "sdkman-cli"
+    "glab"
   ];
 
   homebrew.casks = [
