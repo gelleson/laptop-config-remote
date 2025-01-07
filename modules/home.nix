@@ -76,7 +76,7 @@
         j = "just";
         ils = "jira issue list -a$(jira me)";
 
-
+        llm-message = "~/.config/nix-darwin/scripts/git-commit-message.sh";
         llm-price = "~/.config/nix-darwin/scripts/llm-price.py";
     };
 
