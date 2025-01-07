@@ -29,5 +29,4 @@ if [[ -z "$commit_message" ]]; then
 fi
 
 # Print the commit message
-echo "Generated Commit Message:"
 echo "$commit_message"
