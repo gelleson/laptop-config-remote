@@ -68,6 +68,8 @@
         cat = "bat";
         llm-update-plugins = "sh ~/.config/nix-darwin/codes/llm-install-plugins.sh";
         git-message = "git diff --staged | llm -t git-message | xq -x //commit_message";
+        gm = "git diff {GIT_ARGS:''} | llm -t git-message | xq -x //commit_message";
+
         git-commit = "~/.config/nix-darwin/scripts/git-commit-with-llm.sh";
         k = "kubectl";
         zupd = "source ~/.zshrc";
