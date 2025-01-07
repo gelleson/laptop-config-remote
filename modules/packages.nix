@@ -72,5 +72,6 @@
     oh-my-zsh
 
     jira-cli-go
+    glow
   ];
 }
