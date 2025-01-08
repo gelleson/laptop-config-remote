@@ -388,7 +388,8 @@
         "l3": "llama3.2:3b",
         "hku": "claude-3-haiku-20240307",
         "f": "gemini-1.5-flash-002",
-        "fd": "gemini-1.5-flash-8b-latest"
+        "fd": "gemini-1.5-flash-8b-latest",
+        "fo1": "openrouter/google/gemini-2.0-flash-thinking-exp:free"
     }
     '';
 
