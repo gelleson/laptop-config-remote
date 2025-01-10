@@ -127,4 +127,38 @@
 
         Now, based on the provided diff and the guidelines above, generate an informative GitHub release note. Write your release note inside <release_note> tags.
     '';
+
+    home.file."Library/Application Support/io.datasette.llm/templates/affected-files.yaml".text = ''
+      defaults:
+        model: openrouter/google/gemini-2.0-flash-exp:free
+      prompt: |
+        You are an AI assistant tasked with identifying potentially related files in a code base based on a Jira ticket description. Your goal is to return an array of file paths that may be connected to the task described in the Jira ticket.
+
+        First, carefully read the following Jira ticket description:
+
+        <jira_ticket_and_code_base>
+        $input
+        </jira_ticket_and_code_base>
+
+        Now, analyze the provided code base. The code base is structured as a collection of directories and files. Your task is to identify files that may be related to the Jira ticket description.
+
+        To identify potentially related files:
+        1. Look for keywords, function names, or concepts mentioned in the Jira ticket description.
+        2. Consider files that might need to be modified to implement the described task.
+        3. Include files that are likely to interact with the affected components.
+        4. Consider configuration files or documentation that might need updating.
+
+        After analyzing the code base, compile an array of file paths that you believe may be connected to the Jira ticket's task. Include both files that will definitely need modification and those that might potentially be affected.
+
+        Provide your response in the following format:
+        <related_files>
+        path/to/file1.ext
+        path/to/file2.ext
+        path/to/file3.ext
+        </related_files>
+
+        Ensure that the file paths are accurate and exist within the provided code base structure. If you're unsure about including a file, it's better to include it than to omit it.
+
+        Analyze the code base and provide the array of potentially related file paths based on the Jira ticket description.
+    '';
 }
