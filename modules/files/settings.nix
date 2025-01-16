@@ -27,8 +27,11 @@
         "light": "Sombre Eclat",
         "dark": "Sombre Eclat"
     },
-    "buffer_font_family": "JetBrains Mono"
+    "buffer_font_family": "JetBrains Mono",
+    "features": {
+      "inline_completion_provider": "supermaven"
     }
+}
     '';
 
     home.file.".config/zed/themes/se.json".text = ''
