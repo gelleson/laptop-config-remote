@@ -174,21 +174,8 @@ activate() {
     echo "Activating configuration with darwin-rebuild..."
     /run/current-system/sw/bin/darwin-rebuild switch --flake "$FLAKE_TARGET"
 
+    $CONFIG_DIR/scripts/update-zed-config.sh
     echo "Configuration activated successfully."
-    echo ""
-    echo "Your Nix environment is now set up according to your preferences."
-    echo "You can start using your system with the new configurations and packages."
-    echo "If you need to make further changes, just modify your Nix configuration files and re-run the activation command."
-    echo ""
-    echo "You can also use the following useful aliases:"
-    echo "  updos = \"~/.config/nix-darwin/install.sh activate\""
-    echo "  updos-edit = \"zed ~/.config/nix-darwin/\""
-    echo "  ls = \"eza\""
-    echo "  ll = \"eza -alh\""
-    echo "  cat = \"bat\""
-    echo "  llm-update-plugins = \"sh ~/.config/nix-darwin/codes/llm-install-plugins.sh\""
-    echo ""
-    echo "Feel free to explore and customize these aliases to enhance your workflow!"
 }
 
 # Main script logic for handling subcommands and options
