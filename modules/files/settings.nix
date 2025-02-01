@@ -53,6 +53,11 @@ let
             display_name = "Qwen 72b";
             max_tokens = 128000;
           }
+          {
+            name = "deepseek/deepseek-r1:free";
+            display_name = "Deepseek R1";
+            max_tokens = 128000;
+          }
         ];
         version = "1";
       };
