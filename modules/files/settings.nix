@@ -54,9 +54,14 @@ let
             max_tokens = 128000;
           }
           {
-            name = "deepseek/deepseek-r1:free";
+            name = "deepseek/deepseek-r1";
             display_name = "Deepseek R1";
             max_tokens = 128000;
+          }
+          {
+            name = "mistralai/codestral-mamba";
+            display_name = "CodeStral Mamba";
+            max_tokens = 256000;
           }
         ];
         version = "1";
