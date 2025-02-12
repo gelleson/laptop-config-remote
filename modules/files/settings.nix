@@ -63,6 +63,21 @@ let
             display_name = "CodeStral Mamba";
             max_tokens = 256000;
           }
+          {
+            name = "openai/o3-mini-high";
+            display_name = "O3 Mini High";
+            max_tokens = 200000;
+          }
+          {
+            name = "openai/o3-mini";
+            display_name = "O3 Mini";
+            max_tokens = 200000;
+          }
+          {
+            name = "mistralai/codestral-2501";
+            display_name = "CodeStral 2501";
+            max_tokens = 256000;
+          }
         ];
         version = "1";
       };
