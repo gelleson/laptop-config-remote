@@ -20,6 +20,7 @@
     "oven-sh/bun/bun"
     "sdkman-cli"
     "glab"
+    "temporal"
   ];
 
   homebrew.casks = [
