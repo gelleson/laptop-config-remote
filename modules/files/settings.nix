@@ -78,6 +78,11 @@ let
             display_name = "CodeStral 2501";
             max_tokens = 256000;
           }
+          {
+            name = "google/gemini-2.0-flash-001";
+            display_name = "Gemini 2.0 Flash 001";
+            max_tokens = 1000000;
+          }
         ];
         version = "1";
       };
