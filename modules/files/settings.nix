@@ -11,7 +11,7 @@ let
     git_status = true;
     theme = {
       mode = "system";
-      light = "Vintergata";
+      light = "Atelier Savanna Light";
       dark = "Vintergata";
     };
     buffer_font_family = "JetBrains Mono";

@@ -1,7 +1,7 @@
 { config, pkgs, home, ... }:{
     home.file."Library/Application Support/io.datasette.llm/templates/git-message.yaml".text = ''
     defaults:
-        model: claude-3-haiku
+        model: openrouter/mistralai/codestral-2501
     prompt: |
         You are tasked with generating a conventional commit message based on a git diff. The git diff will be provided to you, and you should analyze it to create an appropriate commit message.
 
