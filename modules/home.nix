@@ -78,6 +78,7 @@
 
         llm-message = "~/.config/nix-darwin/scripts/git-commit-message.sh";
         llm-price = "~/.config/nix-darwin/scripts/llm-price.py";
+        gp = "~/.config/nix-darwin/scripts/git-push.sh";
     };
 
     programs.git = {
