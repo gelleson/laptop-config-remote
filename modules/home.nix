@@ -44,6 +44,7 @@
         load-nvmrc
         source $(jira completion zsh)
         source ~/.secrets
+        export PATH="/Users/gelleson/.deno/bin:$PATH"
         '';
 
         oh-my-zsh = {

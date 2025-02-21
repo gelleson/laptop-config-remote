@@ -53,6 +53,7 @@
     # Cloud and infrastructure tools
     terraform
     flyctl
+    pueue
 
     # Security tools
     age
