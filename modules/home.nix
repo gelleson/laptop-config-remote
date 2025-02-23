@@ -42,7 +42,6 @@
         [[ -s "$(brew --prefix sdkman-cli)/libexec/bin/sdkman-init.sh" ]] && source "$(brew --prefix sdkman-cli)/libexec/bin/sdkman-init.sh"
         add-zsh-hook chpwd load-nvmrc
         load-nvmrc
-        source $(jira completion zsh)
         source ~/.secrets
         export PATH="/Users/gelleson/.deno/bin:$PATH"
         '';
