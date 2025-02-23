@@ -26,7 +26,7 @@ let
       dock = "right";
       default_model = {
         provider = "openai";
-        model = "deepseek/deepseek-chat";
+        model = "google/gemini-2.0-flash-001";
       };
     };
     language_models = {
@@ -864,7 +864,7 @@ in
 
   # Configure default model for Datasette LLM
   home.file."Library/Application Support/io.datasette.llm/default_model.txt".text = ''
-    gemini-1.5-flash-8b-latest
+    openrouter/google/gemini-2.0-flash-001
   '';
 
   # Configure Git commit message template
