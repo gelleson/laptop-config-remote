@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  services.nix-daemon.enable = true;
   nix.settings.experimental-features = "nix-command flakes";
 
   system.stateVersion = 4;
@@ -14,5 +13,5 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 }
