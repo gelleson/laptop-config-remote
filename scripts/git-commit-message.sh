@@ -60,7 +60,7 @@ if $DIFF_COMMAND --quiet; then
 fi
 
 # Generate and extract commit message
-COMMIT_MESSAGE=$($DIFF_COMMAND | llm -t git-message | xq -x '//commit_message') | low
+COMMIT_MESSAGE=$($DIFF_COMMAND | llm -t git-message | xq -x '//commit_message') | tr '[:upper:]' '[:lower:]'
 
 # Check if a commit message was generated
 if [[ -z "$COMMIT_MESSAGE" ]]; then
