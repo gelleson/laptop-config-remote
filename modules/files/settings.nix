@@ -83,6 +83,16 @@ let
             display_name = "Gemini 2.0 Flash 001";
             max_tokens = 1000000;
           }
+          {
+            name = "anthropic/claude-3.7-sonnet:thinking";
+            display_name = "Claude 3.7 Sonnet Thinking";
+            max_tokens = 200000;
+          }
+          {
+            name = "anthropic/claude-3.7-sonnet";
+            display_name = "Claude 3.7 Sonnet Instruct";
+            max_tokens = 200000;
+          }
         ];
         version = "1";
       };
