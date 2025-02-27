@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   nix.settings.experimental-features = "nix-command flakes";
 
-  system.stateVersion = 4;
+  ids.gids.nixbld = 350;
+  system.stateVersion = 5;
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   users.users.gelleson = {
