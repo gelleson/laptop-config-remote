@@ -46,6 +46,7 @@
     "pycharm"
     "datagrip"
     "intellij-idea"
+    "font-jetbrains-mono"
   ];
 
   homebrew.taps = [

@@ -10,7 +10,7 @@ let
     format_on_save = "on"; # Changed to boolean
     git_status = true;
     theme = {
-      mode = "light";
+      mode = "system";
       light = "Rosé Pine Dawn";
       dark = "Vintergata";
     };
