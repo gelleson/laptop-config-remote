@@ -16,7 +16,7 @@ let
     };
     buffer_font_family = "JetBrains Mono";
     features = {
-      inline_completion_provider = "supermaven";
+      edit_prediction_provider = "supermaven";
     };
 
     assistant = {
