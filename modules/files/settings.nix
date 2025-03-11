@@ -54,7 +54,7 @@ let
             max_tokens = 128000;
           }
           {
-            name = "deepseek/deepseek-r1";
+            name = "deepseek/deepseek-r1:floor";
             display_name = "Deepseek R1";
             max_tokens = 128000;
           }
@@ -92,6 +92,11 @@ let
             name = "anthropic/claude-3.7-sonnet";
             display_name = "Claude 3.7 Sonnet";
             max_tokens = 200000;
+          }
+          {
+            name = "qwen/qwq-32b:nitro";
+            display_name = "Qwen QvQ 32b";
+            max_tokens = 131000;
           }
         ];
         version = "1";
