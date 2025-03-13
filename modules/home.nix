@@ -36,7 +36,7 @@
             fi
           fi
         }
-
+        export PATH="$HOME/.cargo/bin:$PATH"
         export PATH="$HOME/.local/bin:$PATH"
         export PATH="$HOME/.bun/bin:$PATH"
         [[ -s "$(brew --prefix sdkman-cli)/libexec/bin/sdkman-init.sh" ]] && source "$(brew --prefix sdkman-cli)/libexec/bin/sdkman-init.sh"
