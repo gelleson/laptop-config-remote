@@ -21,6 +21,8 @@
     "sdkman-cli"
     "glab"
     "temporal"
+    "helm"
+    "openapi-generator"
   ];
 
   homebrew.casks = [
@@ -47,6 +49,7 @@
     "datagrip"
     "intellij-idea"
     "font-jetbrains-mono"
+    "google-cloud-sdk"
   ];
 
   homebrew.taps = [
