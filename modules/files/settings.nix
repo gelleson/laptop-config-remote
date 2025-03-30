@@ -98,6 +98,11 @@ let
             display_name = "Qwen QvQ 32b";
             max_tokens = 131000;
           }
+          {
+            name = "openrouter/google/gemini-2.5-pro-exp-03-25:free";
+            display_name = "Gemini 2.5 Pro Exp 03-25";
+            max_tokens = 1000000;
+          }
         ];
         version = "1";
       };
