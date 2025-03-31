@@ -50,6 +50,7 @@
     "intellij-idea"
     "font-jetbrains-mono"
     "google-cloud-sdk"
+    "macai"
   ];
 
   homebrew.taps = [
