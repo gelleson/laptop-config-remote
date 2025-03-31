@@ -23,6 +23,7 @@
     "temporal"
     "helm"
     "openapi-generator"
+    "jnsahaj/lumen/lumen"
   ];
 
   homebrew.casks = [
