@@ -90,6 +90,9 @@
         user = {
           nickname = "gelleson";
         };
+        init = {
+          defaultBranch = "main";
+        };
       };
     };
 
